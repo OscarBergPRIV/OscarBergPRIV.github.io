@@ -21,18 +21,36 @@
             --text-secondary: #a0a0a0;
             --text-muted: #666666;
             --border-color: #333333;
+            --card-hover-shadow: rgba(0, 212, 255, 0.15);
+            --nav-bg: rgba(10, 10, 10, 0.95);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --accent-primary: #0066cc;
+            --accent-secondary: #6f42c1;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #6c757d;
+            --border-color: #dee2e6;
+            --card-hover-shadow: rgba(0, 102, 204, 0.15);
+            --nav-bg: rgba(255, 255, 255, 0.95);
         }
 
         html {
             scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Navigation */
@@ -40,7 +58,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
+            background: var(--nav-bg);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
@@ -48,12 +66,12 @@
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1.2rem 3rem;
         }
 
         .logo {
@@ -63,11 +81,18 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
@@ -77,6 +102,7 @@
             font-weight: 500;
             transition: color 0.3s ease;
             position: relative;
+            font-size: 0.95rem;
         }
 
         .nav-links a:hover {
@@ -98,15 +124,59 @@
             width: 100%;
         }
 
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
+        }
+
+        .theme-icon {
+            font-size: 1.2rem;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .theme-icon.active {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.08) 0%, transparent 50%);
             position: relative;
             overflow: hidden;
+            padding: 0 2rem;
         }
 
         .hero::before {
@@ -116,8 +186,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="g"><stop offset="20%" stop-color="%2300d4ff" stop-opacity="0.1"/><stop offset="50%" stop-color="%237c3aed" stop-opacity="0.05"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><circle cx="200" cy="200" r="3" fill="%2300d4ff" opacity="0.4"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/></circle><circle cx="800" cy="300" r="2" fill="%237c3aed" opacity="0.3"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite"/></circle><circle cx="300" cy="700" r="2" fill="%2300d4ff" opacity="0.5"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite"/></circle><circle cx="700" cy="800" r="3" fill="%237c3aed" opacity="0.3"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="5s" repeatCount="indefinite"/></circle></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="200" cy="200" r="3" fill="%2300d4ff" opacity="0.4"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/></circle><circle cx="800" cy="300" r="2" fill="%237c3aed" opacity="0.3"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite"/></circle><circle cx="300" cy="700" r="2" fill="%2300d4ff" opacity="0.5"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite"/></circle><circle cx="700" cy="800" r="3" fill="%237c3aed" opacity="0.3"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="5s" repeatCount="indefinite"/></circle></svg>');
             animation: float 20s ease-in-out infinite;
+            pointer-events: none;
         }
 
         @keyframes float {
@@ -127,40 +198,41 @@
 
         .hero-content {
             text-align: center;
-            max-width: 800px;
-            padding: 0 2rem;
+            max-width: 900px;
             z-index: 2;
             position: relative;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 50%, var(--accent-secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .hero-description {
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--text-muted);
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto 3rem;
+            line-height: 1.7;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             color: white;
             text-decoration: none;
@@ -168,6 +240,7 @@
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            font-size: 1rem;
         }
 
         .cta-button:hover {
@@ -177,66 +250,94 @@
 
         /* Sections */
         .section {
-            padding: 5rem 0;
-            max-width: 1200px;
+            padding: 6rem 0;
+            max-width: 1400px;
             margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
         }
 
         /* About Section */
         .about-content {
             display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 3rem;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
             align-items: center;
         }
 
         .about-text {
             font-size: 1.1rem;
             color: var(--text-secondary);
-            line-height: 1.8;
+            line-height: 1.9;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-image-container {
+            position: relative;
         }
 
         .profile-image {
-            width: 250px;
-            height: 250px;
+            width: 280px;
+            height: 280px;
             border-radius: 20px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden;
+            position: relative;
             margin: 0 auto;
-            font-size: 4rem;
-            color: white;
-            font-weight: bold;
+            box-shadow: 0 20px 60px var(--card-hover-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Research Section */
         .research-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
             margin-top: 2rem;
         }
 
         .research-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
@@ -247,50 +348,64 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .research-card:hover::before {
+            transform: scaleX(1);
         }
 
         .research-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--accent-primary);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+            box-shadow: 0 20px 50px var(--card-hover-shadow);
         }
 
         .research-card h3 {
             color: var(--accent-primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 600;
         }
 
         .research-card p {
             color: var(--text-secondary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
         }
 
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
+            gap: 0.7rem;
+            margin-top: 1.5rem;
         }
 
         .tech-tag {
             background: rgba(0, 212, 255, 0.1);
             color: var(--accent-primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
             border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         /* Achievements Section */
         .achievement-item {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
@@ -302,164 +417,296 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             background: linear-gradient(90deg, #ffd700, #ffed4e);
         }
 
         .achievement-item:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
             border-color: #ffd700;
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.1);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
         }
 
         .achievement-title {
             color: #ffd700;
             font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.7rem;
         }
 
         .achievement-icon {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
         }
 
         .achievement-description {
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
+            line-height: 1.6;
         }
 
         .achievement-institution {
             color: var(--text-muted);
             font-style: italic;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         /* Publications Section */
         .publication-item {
             background: var(--bg-secondary);
-            border-left: 3px solid var(--accent-primary);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0 10px 10px 0;
+            border-left: 4px solid var(--accent-primary);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 0 15px 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .publication-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px var(--card-hover-shadow);
         }
 
         .publication-title {
             color: var(--text-primary);
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            line-height: 1.5;
         }
 
         .publication-venue {
             color: var(--accent-secondary);
             font-style: italic;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
         }
 
         .publication-authors {
             color: var(--text-muted);
             font-size: 0.9rem;
+            line-height: 1.5;
         }
 
         /* Skills Section */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
 
         .skill-category {
             background: var(--bg-secondary);
-            padding: 1.5rem;
-            border-radius: 10px;
+            padding: 2rem;
+            border-radius: 15px;
             border: 1px solid var(--border-color);
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 30px var(--card-hover-shadow);
         }
 
         .skill-category h3 {
             color: var(--accent-primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
         }
 
         .skill-list {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 1rem;
+            line-height: 1.8;
         }
 
         /* Contact Section */
         .contact-content {
             text-align: center;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
         }
 
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
         .contact-link {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.7rem;
             color: var(--text-secondary);
             text-decoration: none;
-            padding: 1rem 1.5rem;
+            padding: 1rem 1.8rem;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 50px;
             transition: all 0.3s ease;
+            font-weight: 500;
+            background: var(--bg-secondary);
         }
 
         .contact-link:hover {
             border-color: var(--accent-primary);
             color: var(--accent-primary);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px var(--card-hover-shadow);
         }
 
         /* Footer */
         .footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
-            padding: 2rem 0;
+            padding: 2.5rem 0;
             text-align: center;
             color: var(--text-muted);
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .nav-container {
-                padding: 1rem;
+                padding: 1rem 2rem;
             }
-            
-            .nav-links {
-                gap: 1rem;
+
+            .section {
+                padding: 4rem 2rem;
             }
-            
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-            
+
             .about-content {
                 grid-template-columns: 1fr;
-                text-align: center;
+                gap: 3rem;
             }
-            
-            .contact-links {
+
+            .profile-image {
+                width: 240px;
+                height: 240px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--nav-bg);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
                 align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: left 0.3s ease;
+                border-top: 1px solid var(--border-color);
             }
-            
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.5rem;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-right {
+                gap: 1rem;
+            }
+
+            .hero {
+                min-height: 90vh;
+                padding-top: 80px;
+            }
+
             .section {
-                padding: 3rem 1rem;
+                padding: 3rem 1.5rem;
             }
+
+            .section-title {
+                margin-bottom: 2.5rem;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .contact-link {
+                justify-content: center;
+            }
+
+            .about-text {
+                font-size: 1rem;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 1rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 2.5rem 1rem;
+            }
+
+            .research-card,
+            .achievement-item,
+            .publication-item {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
         }
     </style>
 </head>
@@ -468,14 +715,23 @@
     <nav class="nav">
         <div class="nav-container">
             <div class="logo">Oscar Berg</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#research">Research</a></li>
-                <li><a href="#achievements">Awards</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div class="nav-right">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#achievements">Awards</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="theme-toggle" id="themeToggle">
+                    <span class="theme-icon" id="darkIcon">🌙</span>
+                    <span class="theme-icon active" id="lightIcon">☀️</span>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    ☰
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -504,7 +760,7 @@
                 </p>
                 <p>
                     My passion spans across the entire AI landscape, from Large Language Models (LLMs) to computer vision (CV) applications. 
-                    I'm particularly fascinated by the intersection of AI algorithms on the edge and hardware optimization, especially through novel partitioning strageties 
+                    I'm particularly fascinated by the intersection of AI algorithms on the edge and hardware optimization, especially through novel partitioning strategies 
                     and digital designs on FPGA.
                 </p>
                 <p>
@@ -512,8 +768,10 @@
                     translation, bridging the gap between machine learning frameworks and hardware description languages. This work is under development and maintenance by Fraunhofer IMS.
                 </p>
             </div>
-            <div class="profile-image">
-                <img src="OscarBergAchenSee.jpeg" alt="Oscar Berg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+            <div class="profile-image-container">
+                <div class="profile-image">
+                    <img src="OscarBergAchenSee.jpeg" alt="Oscar Berg">
+                </div>
             </div>
         </div>
     </section>
@@ -588,7 +846,7 @@
             <div class="achievement-description">
                 Paper: "Quantization-Aware Training for Autoencoder-Based Partitioning of CNNs"
             </div>
-            <div class="achievement-institution">PerConAI 2025 (23rd IEEE International Conference on Pervasive Computing anf Communications)</div>
+            <div class="achievement-institution">PerConAI 2025 (23rd IEEE International Conference on Pervasive Computing and Communications)</div>
         </div>
         <div class="achievement-item">
             <div class="achievement-title">
@@ -618,7 +876,7 @@
             <div class="achievement-description">
                 Private scholarship awarded by the Richard-Winter foundation (Germany)
             </div>
-            <div class="achievement-institution">Richward-Winter foundation, Germany</div>
+            <div class="achievement-institution">Richard-Winter foundation, Germany</div>
         </div>
     </section>
 
@@ -638,7 +896,7 @@
         <div class="publication-item">
             <div class="publication-title">TCL: Time-dependent Clustering Loss for Optimizing Post-Training Feature Map Quantization for Partitioned DNNs</div>
             <div class="publication-venue">IEEE Access</div>
-            <div class="publication-authors">Oscar Artur Bernd Berg, Eiraj Saqib, Axel Jantsch, Irida Shallari, Silvia Krug, Isaac Sánchez Leal, Mattias O’Nils</div>
+            <div class="publication-authors">Oscar Artur Bernd Berg, Eiraj Saqib, Axel Jantsch, Irida Shallari, Silvia Krug, Isaac Sánchez Leal, Mattias O'Nils</div>
         </div>
         <div class="publication-item">
             <div class="publication-title">Hardware accelerators for a convolutional neural network in condition monitoring of cnc machines</div>
@@ -654,13 +912,13 @@
             <div class="skill-category">
                 <h3>Languages</h3>
                 <div class="skill-list">
-                    Python, C++, Verilog<br>
+                    Python, C++, Verilog
                 </div>
             </div>
             <div class="skill-category">
                 <h3>AI/ML Frameworks</h3>
                 <div class="skill-list">
-                    PyTorch, Tensorflow, (JAX)<br>
+                    PyTorch, TensorFlow, (JAX)
                 </div>
             </div>
             <div class="skill-category">
@@ -684,16 +942,16 @@
                 <a href="mailto:oscar.berg@web.de" class="contact-link">
                     📧 Email
                 </a>
-                <a href="https://www.linkedin.com/in/oscar-artur-bernd-berg-251059274/" class="contact-link">
+                <a href="https://www.linkedin.com/in/oscar-artur-bernd-berg-251059274/" class="contact-link" target="_blank">
                     💼 LinkedIn
                 </a>
-                <a href="https://github.com/OscarBergPRIV" class="contact-link">
+                <a href="https://github.com/OscarBergPRIV" class="contact-link" target="_blank">
                     🔗 GitHub
                 </a>
-                <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&hl=en&user=b2YZuIUAAAAJ" class="contact-link">
+                <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&hl=en&user=b2YZuIUAAAAJ" class="contact-link" target="_blank">
                     🪶 Scholar
                 </a>
-                <a href="https://github.com/Fraunhofer-IMS/tinyHLS" class="contact-link">
+                <a href="https://github.com/Fraunhofer-IMS/tinyHLS" class="contact-link" target="_blank">
                     ⚡ tinyHLS
                 </a>
             </div>
@@ -706,15 +964,64 @@
     </footer>
 
     <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const darkIcon = document.getElementById('darkIcon');
+        const lightIcon = document.getElementById('lightIcon');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to 'dark'
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', currentTheme);
+        updateThemeIcons(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcons(newTheme);
+        });
+
+        function updateThemeIcons(theme) {
+            if (theme === 'dark') {
+                darkIcon.classList.remove('active');
+                lightIcon.classList.add('active');
+            } else {
+                darkIcon.classList.add('active');
+                lightIcon.classList.remove('active');
+            }
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuToggle.textContent = '☰';
+            });
+        });
+
         // Smooth scroll navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const navHeight = document.querySelector('.nav').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
@@ -724,16 +1031,16 @@
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('.nav');
             if (window.scrollY > 100) {
-                nav.style.background = 'rgba(10, 10, 10, 0.98)';
+                nav.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
             } else {
-                nav.style.background = 'rgba(10, 10, 10, 0.95)';
+                nav.style.boxShadow = 'none';
             }
         });
 
         // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '0px 0px -100px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -748,9 +1055,19 @@
         // Observe elements for animations
         document.querySelectorAll('.research-card, .publication-item, .skill-category, .achievement-item').forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
             observer.observe(el);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - (scrolled / 700);
+            }
         });
     </script>
 </body>
