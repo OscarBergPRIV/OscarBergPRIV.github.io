@@ -3,717 +3,384 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oscar Berg - AI Researcher</title>
+    <title>Oscar Berg — AI Researcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #111111;
-            --bg-tertiary: #1a1a1a;
-            --accent-primary: #00d4ff;
-            --accent-secondary: #7c3aed;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --text-muted: #666666;
-            --border-color: #333333;
-            --card-hover-shadow: rgba(0, 212, 255, 0.15);
-            --nav-bg: rgba(10, 10, 10, 0.95);
-        }
-
-        [data-theme="light"] {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-tertiary: #e9ecef;
-            --accent-primary: #0066cc;
-            --accent-secondary: #6f42c1;
-            --text-primary: #1a1a1a;
-            --text-secondary: #4a4a4a;
-            --text-muted: #6c757d;
-            --border-color: #dee2e6;
-            --card-hover-shadow: rgba(0, 102, 204, 0.15);
-            --nav-bg: rgba(255, 255, 255, 0.95);
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--nav-bg);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 3rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            cursor: pointer;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            padding: 0.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--accent-primary);
-            transform: scale(1.05);
-        }
-
-        .theme-icon {
-            font-size: 1.2rem;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .theme-icon.active {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-        }
-
-        /* Mobile Menu Toggle */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.08) 0%, transparent 50%);
-            position: relative;
-            overflow: hidden;
-            padding: 0 2rem;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="200" cy="200" r="3" fill="%2300d4ff" opacity="0.4"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/></circle><circle cx="800" cy="300" r="2" fill="%237c3aed" opacity="0.3"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite"/></circle><circle cx="300" cy="700" r="2" fill="%2300d4ff" opacity="0.5"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite"/></circle><circle cx="700" cy="800" r="3" fill="%237c3aed" opacity="0.3"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="5s" repeatCount="indefinite"/></circle></svg>');
-            animation: float 20s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        .hero-content {
-            text-align: center;
-            max-width: 900px;
-            z-index: 2;
-            position: relative;
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 50%, var(--accent-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-weight: 400;
-        }
-
-        .hero-description {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            line-height: 1.7;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.2rem 2.5rem;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-            font-size: 1rem;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
-        }
-
-        /* Sections */
-        .section {
-            padding: 6rem 0;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding-left: 3rem;
-            padding-right: 3rem;
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 4rem;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            line-height: 1.9;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .profile-image-container {
-            position: relative;
-        }
-
-        .profile-image {
-            width: 280px;
-            height: 280px;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            margin: 0 auto;
-            box-shadow: 0 20px 60px var(--card-hover-shadow);
-            transition: transform 0.3s ease;
-        }
-
-        .profile-image:hover {
-            transform: scale(1.05) rotate(2deg);
-        }
-
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Research Section */
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-top: 2rem;
-        }
-
-        .research-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .research-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .research-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .research-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-primary);
-            box-shadow: 0 20px 50px var(--card-hover-shadow);
-        }
-
-        .research-card h3 {
-            color: var(--accent-primary);
-            margin-bottom: 1.2rem;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-
-        .research-card p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7rem;
-            margin-top: 1.5rem;
-        }
-
-        .tech-tag {
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--accent-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .tech-tag:hover {
-            background: rgba(0, 212, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Achievements Section */
-        .achievement-item {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .achievement-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #ffd700, #ffed4e);
-        }
-
-        .achievement-item:hover {
-            transform: translateY(-5px);
-            border-color: #ffd700;
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
-        }
-
-        .achievement-title {
-            color: #ffd700;
-            font-weight: 600;
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-        }
-
-        .achievement-icon {
-            font-size: 1.5rem;
-        }
-
-        .achievement-description {
-            color: var(--text-secondary);
-            margin-bottom: 0.7rem;
-            line-height: 1.6;
-        }
-
-        .achievement-institution {
-            color: var(--text-muted);
-            font-style: italic;
-            font-size: 0.95rem;
-        }
-
-        /* Publications Section */
-        .publication-item {
-            background: var(--bg-secondary);
-            border-left: 4px solid var(--accent-primary);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 0 15px 15px 0;
-            transition: all 0.3s ease;
-        }
-
-        .publication-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 10px 30px var(--card-hover-shadow);
-        }
-
-        .publication-title {
-            color: var(--text-primary);
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            font-size: 1.1rem;
-            line-height: 1.5;
-        }
-
-        .publication-venue {
-            color: var(--accent-secondary);
-            font-style: italic;
-            margin-bottom: 0.7rem;
-            font-size: 0.95rem;
-        }
-
-        .publication-authors {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-            box-shadow: 0 10px 30px var(--card-hover-shadow);
-        }
-
-        .skill-category h3 {
-            color: var(--accent-primary);
-            margin-bottom: 1.2rem;
-            font-size: 1.2rem;
-        }
-
-        .skill-list {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        /* Contact Section */
-        .contact-content {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .contact-content p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 1rem 1.8rem;
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            background: var(--bg-secondary);
-        }
-
-        .contact-link:hover {
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px var(--card-hover-shadow);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 2.5rem 0;
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .nav-container {
-                padding: 1rem 2rem;
+        *{margin:0;padding:0;box-sizing:border-box}
+
+        :root{
+            --bg:    #06060b;
+            --bg2:   #0c0c14;
+            --bg3:   #13131e;
+            --surf:  #18182a;
+            --brd:   #252540;
+            --tx1:   #eeedf5;
+            --tx2:   #9e9bb8;
+            --tx3:   #5e5c78;
+            --acc:   #818cf8;
+            --acc2:  #c084fc;
+            --acc3:  #38bdf8;
+            --glow1: rgba(129,140,248,.12);
+            --glow2: rgba(192,132,252,.10);
+            --nav-bg:rgba(6,6,11,.88);
+            --card-shadow:0 1px 2px rgba(0,0,0,.5);
+            --card-hover:0 24px 48px -12px rgba(129,140,248,.14);
+            --radius:16px;
+        }
+
+        [data-theme="light"]{
+            --bg:    #f6f5f9;
+            --bg2:   #eeedf3;
+            --bg3:   #e3e2eb;
+            --surf:  #ffffff;
+            --brd:   #d0cfe0;
+            --tx1:   #1a1a2e;
+            --tx2:   #555570;
+            --tx3:   #8888a0;
+            --acc:   #5b5bd6;
+            --acc2:  #9333ea;
+            --acc3:  #0284c7;
+            --glow1: rgba(91,91,214,.08);
+            --glow2: rgba(147,51,234,.06);
+            --nav-bg:rgba(246,245,249,.90);
+            --card-shadow:0 1px 3px rgba(0,0,0,.06);
+            --card-hover:0 24px 48px -12px rgba(91,91,214,.10);
+        }
+
+        html{scroll-behavior:smooth;font-size:16px}
+
+        body{
+            font-family:'DM Sans',sans-serif;
+            background:var(--bg);
+            color:var(--tx1);
+            line-height:1.6;
+            overflow-x:hidden;
+            transition:background .4s,color .4s;
+        }
+
+        #bgCanvas{
+            position:fixed;top:0;left:0;width:100%;height:100%;
+            z-index:0;pointer-events:none;
+            opacity:.6;transition:opacity .4s;
+        }
+        [data-theme="light"] #bgCanvas{opacity:.3}
+
+        #mouseOrb{
+            position:fixed;width:600px;height:600px;
+            border-radius:50%;
+            background:radial-gradient(circle,var(--glow1) 0%,transparent 70%);
+            pointer-events:none;z-index:0;
+            transform:translate(-50%,-50%);
+            transition:width .6s ease,height .6s ease,opacity .4s;
+            will-change:transform;
+            mix-blend-mode:screen;
+        }
+        [data-theme="light"] #mouseOrb{mix-blend-mode:multiply;opacity:.7}
+
+        .nav{
+            position:fixed;top:0;width:100%;
+            background:var(--nav-bg);
+            backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+            border-bottom:1px solid var(--brd);
+            z-index:1000;transition:all .35s;
+        }
+        .nav-inner{
+            max-width:1320px;margin:0 auto;
+            display:flex;justify-content:space-between;align-items:center;
+            padding:1rem 2.5rem;
+        }
+        .logo{
+            font-family:'Instrument Serif',serif;
+            font-size:1.6rem;font-weight:400;
+            color:var(--acc);cursor:pointer;
+            letter-spacing:-.02em;
+        }
+        .nav-right{display:flex;align-items:center;gap:1.6rem}
+        .nav-links{display:flex;gap:2rem;list-style:none}
+        .nav-links a{
+            color:var(--tx2);text-decoration:none;
+            font-size:.88rem;font-weight:500;
+            letter-spacing:.02em;text-transform:uppercase;
+            transition:color .25s;position:relative;
+        }
+        .nav-links a::after{
+            content:'';position:absolute;bottom:-4px;left:0;
+            width:0;height:1.5px;background:var(--acc);
+            transition:width .3s;
+        }
+        .nav-links a:hover{color:var(--acc)}
+        .nav-links a:hover::after{width:100%}
+
+        .theme-btn{
+            width:42px;height:42px;border-radius:50%;
+            border:1px solid var(--brd);background:var(--bg2);
+            color:var(--tx2);font-size:1.1rem;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            transition:all .3s;
+        }
+        .theme-btn:hover{border-color:var(--acc);color:var(--acc);transform:rotate(20deg) scale(1.08)}
+
+        .mobile-toggle{
+            display:none;background:none;border:none;
+            color:var(--tx1);font-size:1.4rem;cursor:pointer;
+        }
+
+        .hero{
+            min-height:100vh;display:flex;align-items:center;justify-content:center;
+            position:relative;padding:0 2rem;z-index:1;
+        }
+        .hero-content{text-align:center;max-width:860px;position:relative}
+
+        .hero-tag{
+            display:inline-block;
+            font-family:'JetBrains Mono',monospace;
+            font-size:.78rem;font-weight:500;
+            letter-spacing:.12em;text-transform:uppercase;
+            color:var(--acc);
+            border:1px solid color-mix(in srgb,var(--acc) 30%,transparent);
+            padding:.45rem 1.2rem;border-radius:100px;
+            margin-bottom:1.8rem;
+            background:var(--glow1);
+        }
+        .hero h1{
+            font-family:'Instrument Serif',serif;
+            font-size:clamp(2.8rem,7vw,5.6rem);
+            font-weight:400;line-height:1.08;
+            letter-spacing:-.03em;
+            margin-bottom:1.4rem;
+        }
+        .hero h1 em{
+            font-style:italic;
+            background:linear-gradient(135deg,var(--acc),var(--acc2));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+        .hero-sub{
+            font-size:clamp(1rem,2vw,1.25rem);
+            color:var(--tx2);max-width:660px;margin:0 auto 2.6rem;
+            line-height:1.7;
+        }
+        .hero-cta{
+            display:inline-flex;align-items:center;gap:.6rem;
+            padding:1rem 2.2rem;
+            background:var(--acc);color:#060608;
+            font-weight:600;font-size:.95rem;
+            text-decoration:none;border-radius:100px;
+            transition:all .3s;
+            box-shadow:0 0 30px var(--glow1);
+        }
+        .hero-cta:hover{transform:translateY(-2px);box-shadow:0 0 50px var(--glow1);gap:.9rem}
+        .hero-cta svg{transition:transform .3s}
+        .hero-cta:hover svg{transform:translateX(3px)}
+
+        .section{
+            max-width:1320px;margin:0 auto;
+            padding:7rem 2.5rem;position:relative;z-index:1;
+        }
+        .sec-label{
+            font-family:'JetBrains Mono',monospace;
+            font-size:.72rem;font-weight:500;
+            letter-spacing:.15em;text-transform:uppercase;
+            color:var(--acc);margin-bottom:.8rem;
+        }
+        .sec-title{
+            font-family:'Instrument Serif',serif;
+            font-size:clamp(2rem,4vw,3.2rem);
+            font-weight:400;letter-spacing:-.02em;
+            margin-bottom:3.5rem;line-height:1.15;
+        }
+
+        .about-grid{
+            display:grid;grid-template-columns:1fr 300px;gap:4rem;align-items:start;
+        }
+        .about-text{color:var(--tx2);font-size:1.05rem;line-height:1.85}
+        .about-text p{margin-bottom:1.4rem}
+        .about-text strong{color:var(--tx1);font-weight:600}
+
+        .profile-wrap{position:relative}
+        .profile-img{
+            width:280px;height:320px;border-radius:var(--radius);
+            overflow:hidden;margin:0 auto;
+            border:1px solid var(--brd);
+            box-shadow:var(--card-shadow);
+            transition:transform .5s cubic-bezier(.19,1,.22,1);
+        }
+        .profile-img:hover{transform:scale(1.03) rotate(1deg)}
+        .profile-img img{width:100%;height:100%;object-fit:cover}
+        .profile-decoration{
+            position:absolute;top:-16px;right:-16px;width:120px;height:120px;
+            border:1px solid color-mix(in srgb,var(--acc) 25%,transparent);
+            border-radius:var(--radius);z-index:-1;
+        }
+
+        .edu-timeline{margin-top:2.5rem;display:flex;flex-direction:column;gap:1rem}
+        .edu-item{
+            display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
+        }
+        .edu-dot{
+            width:10px;height:10px;border-radius:50%;
+            background:var(--acc);margin-top:.45rem;
+            box-shadow:0 0 8px var(--glow1);
+        }
+        .edu-degree{font-weight:600;color:var(--tx1);font-size:.98rem}
+        .edu-detail{color:var(--tx2);font-size:.88rem;line-height:1.6}
+        .edu-grade{
+            display:inline-block;margin-top:.25rem;
+            font-family:'JetBrains Mono',monospace;
+            font-size:.76rem;color:var(--acc);
+            background:var(--glow1);
+            padding:.2rem .6rem;border-radius:6px;
+            border:1px solid color-mix(in srgb,var(--acc) 20%,transparent);
+        }
+
+        .research-grid{
+            display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+            gap:1.8rem;
+        }
+        .rcard{
+            background:var(--surf);
+            border:1px solid var(--brd);
+            border-radius:var(--radius);
+            padding:2.2rem;
+            transition:all .4s cubic-bezier(.19,1,.22,1);
+            position:relative;overflow:hidden;
+        }
+        .rcard::before{
+            content:'';position:absolute;top:0;left:0;right:0;height:2px;
+            background:linear-gradient(90deg,var(--acc),var(--acc2));
+            transform:scaleX(0);transform-origin:left;transition:transform .4s;
+        }
+        .rcard:hover::before{transform:scaleX(1)}
+        .rcard:hover{
+            transform:translateY(-6px);
+            border-color:color-mix(in srgb,var(--acc) 40%,var(--brd));
+            box-shadow:var(--card-hover);
+        }
+        .rcard-icon{
+            width:44px;height:44px;border-radius:12px;
+            display:flex;align-items:center;justify-content:center;
+            font-size:1.3rem;margin-bottom:1.2rem;
+            background:var(--glow1);
+            border:1px solid color-mix(in srgb,var(--acc) 20%,transparent);
+        }
+        .rcard h3{font-size:1.2rem;font-weight:600;margin-bottom:.8rem;color:var(--tx1)}
+        .rcard p{color:var(--tx2);font-size:.95rem;line-height:1.7;margin-bottom:1.2rem}
+        .tags{display:flex;flex-wrap:wrap;gap:.5rem}
+        .tag{
+            font-family:'JetBrains Mono',monospace;
+            font-size:.72rem;letter-spacing:.03em;
+            padding:.35rem .8rem;border-radius:100px;
+            background:color-mix(in srgb,var(--acc) 8%,transparent);
+            color:var(--acc);
+            border:1px solid color-mix(in srgb,var(--acc) 15%,transparent);
+            transition:all .25s;
+        }
+        .tag:hover{background:color-mix(in srgb,var(--acc) 16%,transparent);transform:translateY(-1px)}
+
+        .ach-list{display:flex;flex-direction:column;gap:1.4rem}
+        .ach{
+            background:var(--surf);border:1px solid var(--brd);
+            border-radius:var(--radius);padding:1.8rem 2rem;
+            display:grid;grid-template-columns:48px 1fr;gap:1.2rem;
+            align-items:start;transition:all .35s;
+        }
+        .ach:hover{transform:translateY(-3px);border-color:color-mix(in srgb,#fbbf24 30%,var(--brd));box-shadow:0 16px 40px rgba(251,191,36,.08)}
+        .ach-badge{
+            width:48px;height:48px;border-radius:12px;
+            display:flex;align-items:center;justify-content:center;
+            font-size:1.4rem;
+            background:rgba(251,191,36,.1);
+            border:1px solid rgba(251,191,36,.2);
+        }
+        .ach-title{font-weight:600;font-size:1.05rem;margin-bottom:.3rem;color:var(--tx1)}
+        .ach-desc{color:var(--tx2);font-size:.92rem;margin-bottom:.3rem}
+        .ach-inst{color:var(--tx3);font-size:.84rem;font-style:italic}
+
+        .pub-list{display:flex;flex-direction:column;gap:1.2rem}
+        .pub{
+            background:var(--surf);
+            border:1px solid var(--brd);
+            border-left:3px solid var(--acc);
+            border-radius:2px var(--radius) var(--radius) 2px;
+            padding:1.6rem 2rem;transition:all .35s;
+        }
+        .pub:hover{transform:translateX(4px);box-shadow:var(--card-hover)}
+        .pub-title{font-weight:600;font-size:1rem;margin-bottom:.5rem;line-height:1.5;color:var(--tx1)}
+        .pub-venue{color:var(--acc2);font-size:.88rem;font-style:italic;margin-bottom:.4rem}
+        .pub-authors{color:var(--tx3);font-size:.82rem;line-height:1.5}
+
+        .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
+        .skill-card{
+            background:var(--surf);border:1px solid var(--brd);
+            border-radius:var(--radius);padding:1.8rem;
+            text-align:center;transition:all .35s;
+        }
+        .skill-card:hover{transform:translateY(-4px);border-color:var(--acc);box-shadow:var(--card-hover)}
+        .skill-card h3{color:var(--acc);font-size:1rem;margin-bottom:.8rem;font-weight:600}
+        .skill-card p{color:var(--tx2);font-size:.95rem;line-height:1.7}
+
+        .contact-center{text-align:center;max-width:680px;margin:0 auto}
+        .contact-center>p{color:var(--tx2);font-size:1.1rem;margin-bottom:2.5rem}
+        .contact-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+        .clink{
+            display:inline-flex;align-items:center;gap:.6rem;
+            padding:.85rem 1.5rem;
+            background:var(--surf);border:1px solid var(--brd);
+            border-radius:100px;color:var(--tx2);
+            text-decoration:none;font-size:.92rem;font-weight:500;
+            transition:all .3s;
+        }
+        .clink:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px);box-shadow:var(--card-hover)}
+
+        .footer{
+            border-top:1px solid var(--brd);
+            padding:2.2rem 0;text-align:center;
+            color:var(--tx3);font-size:.85rem;
+            position:relative;z-index:1;
+        }
+
+        @media(max-width:1024px){
+            .about-grid{grid-template-columns:1fr;gap:2.5rem}
+            .profile-img{width:220px;height:260px}
+        }
+        @media(max-width:768px){
+            .nav-links{
+                position:fixed;top:64px;left:-100%;width:100%;height:calc(100vh - 64px);
+                background:var(--nav-bg);backdrop-filter:blur(24px);
+                flex-direction:column;align-items:center;justify-content:center;
+                gap:2rem;transition:left .35s;
+                border-top:1px solid var(--brd);
             }
-
-            .section {
-                padding: 4rem 2rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .profile-image {
-                width: 240px;
-                height: 240px;
-            }
+            .nav-links.active{left:0}
+            .nav-links a{font-size:1.1rem}
+            .mobile-toggle{display:block}
+            .nav-inner{padding:.9rem 1.2rem}
+            .section{padding:4rem 1.4rem}
+            .research-grid{grid-template-columns:1fr}
+            .contact-grid{flex-direction:column;align-items:stretch}
+            .clink{justify-content:center}
+            .hero{min-height:92vh;padding-top:80px}
+        }
+        @media(max-width:480px){
+            .section{padding:3rem 1rem}
+            .rcard,.ach,.pub{padding:1.4rem}
+            .hero h1{font-size:2.2rem}
         }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: var(--nav-bg);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 2rem;
-                transition: left 0.3s ease;
-                border-top: 1px solid var(--border-color);
-            }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .nav-links a {
-                font-size: 1.5rem;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .nav-right {
-                gap: 1rem;
-            }
-
-            .hero {
-                min-height: 90vh;
-                padding-top: 80px;
-            }
-
-            .section {
-                padding: 3rem 1.5rem;
-            }
-
-            .section-title {
-                margin-bottom: 2.5rem;
-            }
-
-            .research-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .contact-links {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .contact-link {
-                justify-content: center;
-            }
-
-            .about-text {
-                font-size: 1rem;
-            }
-
-            .profile-image {
-                width: 200px;
-                height: 200px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-container {
-                padding: 1rem 1rem;
-            }
-
-            .logo {
-                font-size: 1.2rem;
-            }
-
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .section {
-                padding: 2.5rem 1rem;
-            }
-
-            .research-card,
-            .achievement-item,
-            .publication-item {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.6s ease forwards;
-        }
+        .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.19,1,.22,1),transform .7s cubic-bezier(.19,1,.22,1)}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+        .stagger>.reveal:nth-child(1){transition-delay:.05s}
+        .stagger>.reveal:nth-child(2){transition-delay:.12s}
+        .stagger>.reveal:nth-child(3){transition-delay:.19s}
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <canvas id="bgCanvas"></canvas>
+    <div id="mouseOrb"></div>
+
     <nav class="nav">
-        <div class="nav-container">
+        <div class="nav-inner">
             <div class="logo">Oscar Berg</div>
             <div class="nav-right">
                 <ul class="nav-links" id="navLinks">
@@ -724,351 +391,325 @@
                     <li><a href="#publications">Publications</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <div class="theme-toggle" id="themeToggle">
-                    <span class="theme-icon" id="darkIcon">🌙</span>
-                    <span class="theme-icon active" id="lightIcon">☀️</span>
-                </div>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    ☰
-                </button>
+                <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+                <button class="mobile-toggle" id="mobToggle">☰</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Personal Portfolio</h1>
-            <p class="hero-subtitle">Double Degree PhD Student | TU Wien & Midsweden University</p>
-            <p class="hero-description">
-                Advancing the frontiers of efficient AI implementation through model partitioning strategies, 
-                FPGA design, and high-level synthesis tools. Towards efficient AI implementation on the edge.
-            </p>
-            <a href="#research" class="cta-button">Explore My Research</a>
+            <span class="hero-tag">PhD Researcher</span>
+            <h1>Pushing the Boundaries of <em>Artificial Intelligence</em></h1>
+            <p class="hero-sub">Double degree PhD student at TU Wien &amp; Mid Sweden University — researching agentic AI, LLM-driven automation, and efficient model partitioning for real-world deployment.</p>
+            <a href="#research" class="hero-cta">
+                Explore My Research
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="section">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
+        <div class="sec-label">Background</div>
+        <h2 class="sec-title">About Me</h2>
+        <div class="about-grid">
             <div class="about-text">
-                <p>
-                    I'm Oscar Berg, a double degree PhD student from TU Wien (Austria) and Midsweden University (Sweden), 
-                    specializing in efficient AI implementation. My research focuses on developing innovative strategies 
-                    for AI model partitioning to optimize performance and resource utilization.
-                </p>
-                <p>
-                    My passion spans across the entire AI landscape, from Large Language Models (LLMs) to computer vision (CV) applications. 
-                    I'm particularly fascinated by the intersection of AI algorithms on the edge and hardware optimization, especially through novel partitioning strategies 
-                    and digital designs on FPGA.
-                </p>
-                <p>
-                    During my Master's thesis @Fraunhofer IMS, I created tinyHLS, an AI-High Level Synthesis tool that enables TensorFlow-to-Verilog 
-                    translation, bridging the gap between machine learning frameworks and hardware description languages. This work is under development and maintenance by Fraunhofer IMS.
-                </p>
+                <p>I'm <strong>Oscar Berg</strong>, a double degree PhD student at <strong>TU Wien</strong> (Austria) and <strong>Mid Sweden University</strong> (Sweden), specializing in efficient AI implementation. My research focuses on developing innovative strategies for AI model partitioning to optimize performance and resource utilization.</p>
+                <p>My passion spans from <strong>Large Language Models</strong> and <strong>agentic AI systems</strong> to efficient inference and intelligent automation. I'm particularly fascinated by how LLMs can be leveraged to build autonomous agents that reason, plan, and execute complex tasks — and how these models can be deployed efficiently at scale.</p>
+                <p>My background is rooted in <strong>embedded AI</strong>. During my Master's thesis at <strong>Fraunhofer IMS</strong> (Duisburg), I designed and built <strong>tinyHLS</strong> — a template-based compiler enabling TensorFlow-to-Verilog translation for embedded AI deployment. The thesis was graded <strong>1.0</strong>, and tinyHLS is now under active development and maintenance by Fraunhofer IMS.</p>
+
+                <div class="edu-timeline">
+                    <div class="edu-item">
+                        <div class="edu-dot"></div>
+                        <div class="edu-info">
+                            <div class="edu-degree">PhD (ongoing) — TU Wien &amp; Mid Sweden University</div>
+                            <div class="edu-detail">Double degree. Efficient AI, model partitioning, agentic systems.</div>
+                        </div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-dot"></div>
+                        <div class="edu-info">
+                            <div class="edu-degree">Master of Science — University of Stuttgart &amp; Fraunhofer IMS, Duisburg</div>
+                            <div class="edu-detail">2020–2023. Created tinyHLS (TF-to-Verilog compiler).</div>
+                            <span class="edu-grade">Overall: 1.5 · Thesis: 1.0</span>
+                        </div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-dot"></div>
+                        <div class="edu-info">
+                            <div class="edu-degree">Bachelor of Science — University of Wuppertal</div>
+                            <div class="edu-detail">2017–2020.</div>
+                            <span class="edu-grade">Grade: 1.3</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="profile-image-container">
-                <div class="profile-image">
+            <div class="profile-wrap">
+                <div class="profile-img">
                     <img src="OscarBergAchenSee.jpeg" alt="Oscar Berg">
                 </div>
+                <div class="profile-decoration"></div>
             </div>
         </div>
     </section>
 
-    <!-- Research Section -->
     <section id="research" class="section">
-        <h2 class="section-title">Research Areas</h2>
-        <div class="research-grid">
-            <div class="research-card">
-                <h3>AI Model Partitioning Strategies</h3>
-                <p>
-                    Developing innovative approaches to partition AI models for efficient deployment across distributed systems 
-                    and edge devices, optimizing for latency, energy consumption, and computational resources.
-                </p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Model Optimization</span>
-                    <span class="tech-tag">Edge Computing</span>
-                    <span class="tech-tag">Distributed Systems</span>
-                    <span class="tech-tag">Split Computing</span>
+        <div class="sec-label">Focus Areas</div>
+        <h2 class="sec-title">Research</h2>
+        <div class="research-grid stagger">
+            <div class="rcard reveal">
+                <div class="rcard-icon">🤖</div>
+                <h3>Agentic AI &amp; LLM Automation</h3>
+                <p>Investigating autonomous AI agent architectures that leverage LLMs for complex task planning, tool use, and multi-step reasoning — enabling intelligent automation pipelines that operate with minimal human oversight.</p>
+                <div class="tags">
+                    <span class="tag">AI Agents</span>
+                    <span class="tag">Agentic Workflows</span>
+                    <span class="tag">Tool Use</span>
+                    <span class="tag">Autonomous Systems</span>
                 </div>
             </div>
-            <div class="research-card">
+            <div class="rcard reveal">
+                <div class="rcard-icon">🧠</div>
                 <h3>Large Language Models (LLMs)</h3>
-                <p>
-                    Exploring efficient implementation techniques for LLMs, focusing on compression methods, quantization strategies, 
-                    and novel architectures that maintain performance while reducing computational overhead.
-                </p>
-                <div class="tech-tags">
-                    <span class="tech-tag">LLM</span>
-                    <span class="tech-tag">Partitioning</span>
-                    <span class="tech-tag">Quantization</span>
-                    <span class="tech-tag">NLP</span>
+                <p>Exploring efficient implementation techniques for LLMs, focusing on compression methods, quantization strategies, and novel architectures that maintain performance while reducing computational overhead.</p>
+                <div class="tags">
+                    <span class="tag">LLM</span>
+                    <span class="tag">Partitioning</span>
+                    <span class="tag">Quantization</span>
+                    <span class="tag">NLP</span>
                 </div>
             </div>
-            <div class="research-card">
-                <h3>FPGA Digital Design & HLS</h3>
-                <p>
-                    Bridging AI algorithms and hardware through FPGA implementations and high-level synthesis. Creator of tinyHLS, 
-                    an AI-HLS tool enabling TensorFlow-to-Verilog translation for efficient hardware deployment.
-                </p>
-                <div class="tech-tags">
-                    <span class="tech-tag">FPGA</span>
-                    <span class="tech-tag">Verilog</span>
-                    <span class="tech-tag">HLS</span>
-                    <span class="tech-tag">TensorFlow</span>
-                </div>
-            </div>
-            <div class="research-card">
-                <h3>Computer Vision</h3>
-                <p>
-                    Investigating efficient computer vision algorithms and their hardware implementations, with emphasis on 
-                    real-time processing capabilities and resource-constrained environments.
-                </p>
-                <div class="tech-tags">
-                    <span class="tech-tag">CNNs</span>
-                    <span class="tech-tag">Real-time Processing</span>
-                    <span class="tech-tag">Edge Deployment</span>
-                    <span class="tech-tag">Hardware Acceleration</span>
+            <div class="rcard reveal">
+                <div class="rcard-icon">⚡</div>
+                <h3>AI Model Partitioning Strategies</h3>
+                <p>Developing innovative approaches to partition AI models for efficient deployment across distributed systems and edge devices, optimizing for latency, energy consumption, and computational resources.</p>
+                <div class="tags">
+                    <span class="tag">Model Optimization</span>
+                    <span class="tag">Edge Computing</span>
+                    <span class="tag">Distributed Systems</span>
+                    <span class="tag">Split Computing</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Achievements & Awards Section -->
     <section id="achievements" class="section">
-        <h2 class="section-title">Achievements & Awards</h2>
-        <div class="achievement-item">
-            <div class="achievement-title">
-                <span class="achievement-icon">🏆</span>
-                Best Paper Award
+        <div class="sec-label">Recognition</div>
+        <h2 class="sec-title">Achievements &amp; Awards</h2>
+        <div class="ach-list stagger">
+            <div class="ach reveal">
+                <div class="ach-badge">🏆</div>
+                <div>
+                    <div class="ach-title">Best Paper Award</div>
+                    <div class="ach-desc">"Quantization-Aware Training for Autoencoder-Based Partitioning of CNNs"</div>
+                    <div class="ach-inst">PerConAI 2025 — 23rd IEEE International Conference on Pervasive Computing and Communications</div>
+                </div>
             </div>
-            <div class="achievement-description">
-                Paper: "Quantization-Aware Training for Autoencoder-Based Partitioning of CNNs"
+            <div class="ach reveal">
+                <div class="ach-badge">🎤</div>
+                <div>
+                    <div class="ach-title">Best Presentation Award</div>
+                    <div class="ach-desc">"Efficient Inference of parallel partitioned hybrid-Vision Transformers"</div>
+                    <div class="ach-inst">RAGE 2025 — 4th Real-time intelliGent computing workshop</div>
+                </div>
             </div>
-            <div class="achievement-institution">PerConAI 2025 (23rd IEEE International Conference on Pervasive Computing and Communications)</div>
-        </div>
-        <div class="achievement-item">
-            <div class="achievement-title">
-                <span class="achievement-icon">🎤</span>
-                Best Presentation Award
+            <div class="ach reveal">
+                <div class="ach-badge">🎓</div>
+                <div>
+                    <div class="ach-title">Deutschlandstipendium (2×)</div>
+                    <div class="ach-desc">Received twice at the University of Wuppertal in collaboration with Ferchau AG</div>
+                    <div class="ach-inst">German federal budget &amp; Ferchau AG</div>
+                </div>
             </div>
-            <div class="achievement-description">
-                Paper: "Efficient Inference of parallel partitioned hybrid-Vision Transformers"
+            <div class="ach reveal">
+                <div class="ach-badge">🎓</div>
+                <div>
+                    <div class="ach-title">Richard-Winter Scholarship</div>
+                    <div class="ach-desc">Private scholarship awarded by the Richard-Winter Foundation</div>
+                    <div class="ach-inst">Richard-Winter Foundation, Germany</div>
+                </div>
             </div>
-            <div class="achievement-institution">RAGE 2025 (4th Real-time intelliGent computing workshop)</div>
-        </div>
-        <div class="achievement-item">
-            <div class="achievement-title">
-                <span class="achievement-icon">🎓</span>
-                German scholarship (Deutschlandstipendium) 2x
-            </div>
-            <div class="achievement-description">
-                Received 2x german scholarship at the University of Wuppertal with collaboration of Ferchau AG
-            </div>
-            <div class="achievement-institution">german federal budget and Ferchau AG</div>
-        </div>
-        <div class="achievement-item">
-            <div class="achievement-title">
-                <span class="achievement-icon">🎓</span>
-                Richard-Winter scholarship
-            </div>
-            <div class="achievement-description">
-                Private scholarship awarded by the Richard-Winter foundation (Germany)
-            </div>
-            <div class="achievement-institution">Richard-Winter foundation, Germany</div>
         </div>
     </section>
 
-    <!-- Publications Section -->
     <section id="publications" class="section">
-        <h2 class="section-title">Publications</h2>
-        <div class="publication-item">
-            <div class="publication-title">Quantization-Aware Training for Autoencoder-Based Partitioning of CNNs</div>
-            <div class="publication-venue">2025 IEEE International Conference on Pervasive Computing and Communications Workshops and other Affiliated Events (PerCom Workshops)</div>
-            <div class="publication-authors">Oscar Artur Bernd Berg, Eiraj Saqib, Axel Jantsch, Mattias O'Nils, Irida Shallari, Isaac Sánchez Leal, Silvia Krug</div>
-        </div>
-        <div class="publication-item">
-            <div class="publication-title">Efficient Inference of parallel partitioned hybrid-Vision Transformers</div>
-            <div class="publication-venue">Proceedings of the 4th International Workshop on Real-time and IntelliGent Edge computing</div>
-            <div class="publication-authors">Oscar Artur Bernd Berg, Eiraj Saqib, Axel Jantsch, Mattias O'Nils, Silvia Krug, Irida Shallari, Isaac Sánchez Leal</div>
-        </div>
-        <div class="publication-item">
-            <div class="publication-title">TCL: Time-dependent Clustering Loss for Optimizing Post-Training Feature Map Quantization for Partitioned DNNs</div>
-            <div class="publication-venue">IEEE Access</div>
-            <div class="publication-authors">Oscar Artur Bernd Berg, Eiraj Saqib, Axel Jantsch, Irida Shallari, Silvia Krug, Isaac Sánchez Leal, Mattias O'Nils</div>
-        </div>
-        <div class="publication-item">
-            <div class="publication-title">Hardware accelerators for a convolutional neural network in condition monitoring of cnc machines</div>
-            <div class="publication-venue">2023 IEEE SENSORS</div>
-            <div class="publication-authors">Ingo Hoyer, Oscar Berg, Lukas Krupp, Alexander Utz, Christian Wiede, Karsten Seidl</div>
+        <div class="sec-label">Selected Work</div>
+        <h2 class="sec-title">Publications</h2>
+        <div class="pub-list stagger">
+            <div class="pub reveal">
+                <div class="pub-title">Quantization-Aware Training for Autoencoder-Based Partitioning of CNNs</div>
+                <div class="pub-venue">2025 IEEE PerCom Workshops</div>
+                <div class="pub-authors">O. A. B. Berg, E. Saqib, A. Jantsch, M. O'Nils, I. Shallari, I. Sánchez Leal, S. Krug</div>
+            </div>
+            <div class="pub reveal">
+                <div class="pub-title">Efficient Inference of parallel partitioned hybrid-Vision Transformers</div>
+                <div class="pub-venue">Proceedings of the 4th International Workshop on Real-time and IntelliGent Edge computing</div>
+                <div class="pub-authors">O. A. B. Berg, E. Saqib, A. Jantsch, M. O'Nils, S. Krug, I. Shallari, I. Sánchez Leal</div>
+            </div>
+            <div class="pub reveal">
+                <div class="pub-title">TCL: Time-dependent Clustering Loss for Optimizing Post-Training Feature Map Quantization for Partitioned DNNs</div>
+                <div class="pub-venue">IEEE Access</div>
+                <div class="pub-authors">O. A. B. Berg, E. Saqib, A. Jantsch, I. Shallari, S. Krug, I. Sánchez Leal, M. O'Nils</div>
+            </div>
+            <div class="pub reveal">
+                <div class="pub-title">Hardware accelerators for a convolutional neural network in condition monitoring of CNC machines</div>
+                <div class="pub-venue">2023 IEEE SENSORS</div>
+                <div class="pub-authors">I. Hoyer, O. Berg, L. Krupp, A. Utz, C. Wiede, K. Seidl</div>
+            </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills" class="section">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
+        <div class="sec-label">Toolkit</div>
+        <h2 class="sec-title">Technical Skills</h2>
+        <div class="skills-grid stagger">
+            <div class="skill-card reveal">
                 <h3>Languages</h3>
-                <div class="skill-list">
-                    Python, C++, Verilog
-                </div>
+                <p>Python, C++</p>
             </div>
-            <div class="skill-category">
-                <h3>AI/ML Frameworks</h3>
-                <div class="skill-list">
-                    PyTorch, TensorFlow, (JAX)
-                </div>
+            <div class="skill-card reveal">
+                <h3>AI / ML Frameworks</h3>
+                <p>PyTorch, TensorFlow, (JAX)</p>
             </div>
-            <div class="skill-category">
-                <h3>FPGA & Hardware</h3>
-                <div class="skill-list">
-                    Xilinx Vivado, Verilog<br>
-                    High-Level Synthesis, RTL Design
-                </div>
+            <div class="skill-card reveal">
+                <h3>LLMs &amp; Agents</h3>
+                <p>LangChain, Prompt Engineering, Agentic Architectures, RAG</p>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="section">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-content">
-            <p>
-                I'm always interested in discussing research collaborations. Feel free to reach out!
-            </p>
-            <div class="contact-links">
-                <a href="mailto:oscar.berg@web.de" class="contact-link">
-                    📧 Email
-                </a>
-                <a href="https://www.linkedin.com/in/oscar-artur-bernd-berg-251059274/" class="contact-link" target="_blank">
-                    💼 LinkedIn
-                </a>
-                <a href="https://github.com/OscarBergPRIV" class="contact-link" target="_blank">
-                    🔗 GitHub
-                </a>
-                <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&hl=en&user=b2YZuIUAAAAJ" class="contact-link" target="_blank">
-                    🪶 Scholar
-                </a>
-                <a href="https://github.com/Fraunhofer-IMS/tinyHLS" class="contact-link" target="_blank">
-                    ⚡ tinyHLS
-                </a>
+        <div class="sec-label">Connect</div>
+        <h2 class="sec-title">Get In Touch</h2>
+        <div class="contact-center">
+            <p>I'm always interested in discussing research collaborations. Feel free to reach out!</p>
+            <div class="contact-grid">
+                <a href="mailto:oscar.berg@web.de" class="clink">📧 Email</a>
+                <a href="https://www.linkedin.com/in/oscar-artur-bernd-berg-251059274/" class="clink" target="_blank">💼 LinkedIn</a>
+                <a href="https://github.com/OscarBergPRIV" class="clink" target="_blank">🔗 GitHub</a>
+                <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=b2YZuIUAAAAJ" class="clink" target="_blank">🪶 Scholar</a>
+                <a href="https://github.com/Fraunhofer-IMS/tinyHLS" class="clink" target="_blank">⚡ tinyHLS</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2025 Oscar Berg. All rights reserved.</p>
-    </footer>
+    <footer class="footer">&copy; 2025 Oscar Berg. All rights reserved.</footer>
 
     <script>
-        // Theme Toggle Functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const darkIcon = document.getElementById('darkIcon');
-        const lightIcon = document.getElementById('lightIcon');
-        const html = document.documentElement;
+    const html = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    let theme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', theme);
+    btn.textContent = theme === 'dark' ? '🌙' : '☀️';
+    btn.addEventListener('click', () => {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        btn.textContent = theme === 'dark' ? '🌙' : '☀️';
+    });
 
-        // Check for saved theme preference or default to 'dark'
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        html.setAttribute('data-theme', currentTheme);
-        updateThemeIcons(currentTheme);
+    const mobBtn = document.getElementById('mobToggle');
+    const navLinks = document.getElementById('navLinks');
+    mobBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+        navLinks.classList.remove('active'); mobBtn.textContent = '☰';
+    }));
 
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcons(newTheme);
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) window.scrollTo({ top: t.offsetTop - 72, behavior: 'smooth' });
         });
+    });
 
-        function updateThemeIcons(theme) {
-            if (theme === 'dark') {
-                darkIcon.classList.remove('active');
-                lightIcon.classList.add('active');
-            } else {
-                darkIcon.classList.add('active');
-                lightIcon.classList.remove('active');
+    const orb = document.getElementById('mouseOrb');
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    let ox = mx, oy = my;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function animOrb() {
+        ox += (mx - ox) * .06;
+        oy += (my - oy) * .06;
+        orb.style.transform = `translate(${ox - 300}px,${oy - 300}px)`;
+        requestAnimationFrame(animOrb);
+    })();
+
+    const cvs = document.getElementById('bgCanvas');
+    const ctx = cvs.getContext('2d');
+    let W, H, particles = [];
+    function resize() { W = cvs.width = window.innerWidth; H = cvs.height = window.innerHeight; }
+    resize(); window.addEventListener('resize', resize);
+
+    class Dot {
+        constructor() { this.reset(); }
+        reset() {
+            this.x = Math.random() * W;
+            this.y = Math.random() * H;
+            this.r = Math.random() * 1.6 + .4;
+            this.vx = (Math.random() - .5) * .18;
+            this.vy = (Math.random() - .5) * .18;
+            this.baseA = Math.random() * .35 + .1;
+            this.a = this.baseA;
+        }
+        update() {
+            this.x += this.vx; this.y += this.vy;
+            if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+            const dx = this.x - mx, dy = this.y - my;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            this.a = d < 200 ? this.baseA + (1 - d / 200) * .5 : this.baseA;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            const isLight = html.getAttribute('data-theme') === 'light';
+            ctx.fillStyle = isLight
+                ? `rgba(91,91,214,${this.a})`
+                : `rgba(129,140,248,${this.a})`;
+            ctx.fill();
+        }
+    }
+    for (let i = 0; i < 90; i++) particles.push(new Dot());
+
+    (function drawLoop() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => { p.update(); p.draw(); });
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const d = dx * dx + dy * dy;
+                if (d < 12000) {
+                    const isLight = html.getAttribute('data-theme') === 'light';
+                    ctx.strokeStyle = isLight
+                        ? `rgba(91,91,214,${.06 * (1 - d / 12000)})`
+                        : `rgba(129,140,248,${.06 * (1 - d / 12000)})`;
+                    ctx.lineWidth = .5;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
             }
         }
+        requestAnimationFrame(drawLoop);
+    })();
 
-        // Mobile Menu Toggle
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const navLinks = document.getElementById('navLinks');
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: .12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-        mobileMenuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileMenuToggle.textContent = '☰';
-            });
-        });
-
-        // Smooth scroll navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const navHeight = document.querySelector('.nav').offsetHeight;
-                    const targetPosition = target.offsetTop - navHeight;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Navigation background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.nav');
-            if (window.scrollY > 100) {
-                nav.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                nav.style.boxShadow = 'none';
-            }
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animations
-        document.querySelectorAll('.research-card, .publication-item, .skill-category, .achievement-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            observer.observe(el);
-        });
-
-        // Parallax effect for hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero-content');
-            if (hero && scrolled < window.innerHeight) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-                hero.style.opacity = 1 - (scrolled / 700);
-            }
-        });
+    const heroC = document.querySelector('.hero-content');
+    window.addEventListener('scroll', () => {
+        const s = window.pageYOffset;
+        if (s < window.innerHeight && heroC) {
+            heroC.style.transform = `translateY(${s * .35}px)`;
+            heroC.style.opacity = 1 - s / 800;
+        }
+    });
     </script>
 </body>
 </html>
